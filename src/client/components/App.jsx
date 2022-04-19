@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Login from '../containers/Login';
 import ChatContainer from '../containers/ChatContainer';
+import '../containers/style/chat.css'
 
 function App() {
   /** use state to keep track of whether or not we are connected to server */

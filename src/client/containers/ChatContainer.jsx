@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import User from '../components/user';
 import Message from '../components/Message';
-// import './style/chat.css';
+import './style/chat.css';
 
 // const CLIENT_PORT = 8080;
 const SERVER_PORT = 3000;

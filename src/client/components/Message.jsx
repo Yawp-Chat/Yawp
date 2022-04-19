@@ -1,6 +1,6 @@
 import React from 'react';
 // single message
-export default (props) => {
+export default function(props) {
   return (
     <li className="message-li">
       <img className="img-user-message" />
