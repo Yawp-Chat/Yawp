@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default (props) => {
+  const { handleSubmit } = props
 
   const handleEnter = (e) => {
     if (e.key === 'Enter') handleSubmit();
@@ -12,7 +13,7 @@ export default (props) => {
       placeholder="write message here..."
       onKeyPress={(e) => handleEnter(e)}
     />
-    <button type="submit" className="btn-send" onClick={props.handleSubmit}>
+    <button type="submit" className="btn-send" onClick={handleSubmit}>
       Send
     </button>
   </>
