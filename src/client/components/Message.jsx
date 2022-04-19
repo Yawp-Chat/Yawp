@@ -1,11 +1,11 @@
 import React from 'react';
 // single message
-export default () => {
+export default (props) => {
   return (
-    <li class="message-li">
-      <img class="img-user-message" />
-      <h3 class="message-username">username</h3>
-      <h5 class="message">message</h5>
+    <li className="message-li">
+      <img className="img-user-message" />
+      <h3 className="message-username">username</h3>
+      <h5 className="message">message</h5>
     </li>
   );
 };
