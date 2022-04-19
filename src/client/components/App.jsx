@@ -1,5 +1,7 @@
 import React from 'react';
 import { io } from 'socket.io-client';
+import ChatBox from './ChatBox';
+import Input from './Input';
 
 const CLIENT_PORT = 8080;
 
@@ -21,21 +23,10 @@ function App() {
     console.log('send message');
   };
 
-  const handleEnter = (e) => {
-    if (e.key === 'Enter') handleSubmit();
-  };
-
   return (
     <div className="messageContainer">
-      <div id="message-area" />
-      <input
-        className="chatInput"
-        placeholder="write message here..."
-        onKeyPress={(e) => handleEnter(e)}
-      />
-      <button type="submit" className="btn-send" onClick={handleSubmit}>
-        Send
-      </button>
+      <ChatBox />
+      <Input handleSubmit={handleSubmit} />
     </div>
   );
 }
