@@ -34,6 +34,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
+    "nodemon": "^2.0.15",
     "prettier": "^2.6.2",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
@@ -45,6 +46,8 @@
     "express": "^4.17.3",
     "html-webpack-plugin": "^5.5.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1"
   }
 }

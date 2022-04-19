@@ -39,7 +39,7 @@ module.exports = {
     },
     proxy: {
       // uncomment the proxy method to allow the frontend to communicate with the proxy
-      '/api': `http://localhost:${SERVER_PORT}/`,
+      '/': `http://localhost:${SERVER_PORT}/`,
     },
   },
   // NOTE: resolve allows you to not have to specify file extensions when importing
