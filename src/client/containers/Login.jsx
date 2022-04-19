@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default () => {
+export default function () {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -42,4 +42,4 @@ export default () => {
       </form>
     </div>
   );
-};
+}
