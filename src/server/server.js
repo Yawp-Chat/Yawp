@@ -12,7 +12,13 @@ const app = express();
 const server = http.createServer(app);
 
 /** Establish new WS server */
-const io = new Server(server, {});
+/** Handle CORS */
+const io = new Server(server, {
+  cors: {
+    origin: 'https://localhost:8080',
+    methods: ['GET', 'POST'],
+  },
+});
 
 io.on('connection', (socket) => {
   console.log(`socket connected: ${socket.id}`);
