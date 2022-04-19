@@ -1,5 +1,6 @@
 import React from 'react';
 // single message
+
 export default (props) => {
   const { text } = props;
 

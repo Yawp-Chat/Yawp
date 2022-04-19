@@ -1,33 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100&display=swap');
+
+body{
+  background-color: #000;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+ }
+
 .messageContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Kanit', sans-serif;
+  
 }
 
+
 .chatContainer {
+  height: 75vh;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 0px 0px;
+  gap: 10px 10px;
+  border: 1px solid white;
   grid-auto-flow: row;
   grid-template-areas:
     'userBox chat'
     'userBox chat'
     'message chat';
-  padding: 30px;
+  
 }
 
 .userBox {
   grid-area: userBox;
+  border: 1px solid white;
+  padding: 10px 30px 10px 30px;
+  background-color: black;
 }
 
 .chat {
   grid-area: chat;
+  border: 1px solid white;
+  padding: 10px 30px 10px 30px;
 }
 
 .message {
   grid-area: message;
+  /* border: 1px solid white; */
+  padding: 10px 30px 10px 30px;
+  /* overflow-y: 
+  scroll; */
+  align-self: end;
+  justify-self: center;
+
 }
+
+.btn-send{
+  margin-top: 10px;
+  display: block;
+  position: relative;
+  left: 73.5%
+}
+
+
 
 /* User.jsx Components
 
