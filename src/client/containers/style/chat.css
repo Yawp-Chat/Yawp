@@ -1,3 +1,9 @@
+.messageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .chatContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -8,10 +14,11 @@
     'userBox chat'
     'userBox chat'
     'message chat';
+  padding: 30px;
 }
 
 .userBox {
-  grid-area: users;
+  grid-area: userBox;
 }
 
 .chat {
@@ -21,3 +28,11 @@
 .message {
   grid-area: message;
 }
+
+/* User.jsx Components
+
+/user-UserBox
+
+
+
+*/

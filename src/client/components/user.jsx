@@ -1,10 +1,11 @@
 import React from 'react';
 // single user in the chat
-export default () => {
+
+export default (props) => {
   return (
-    <li class="user-userBox">
-      <img class="user-img-userBox" />
-      <h3 class="username-userBox">name</h3>
+    <li className="user-userBox">
+      <img className="user-img-userBox" />
+      <h3 className="username-userBox">name</h3>
     </li>
   );
 };
