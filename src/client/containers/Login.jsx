@@ -1,6 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigate('/home')
+  }
+
+  const submitButton = <button onClick={(e) => handleSubmit(e)}>Submit</button>
+
   return (
     <div>
       <form name="signin">
@@ -11,6 +21,7 @@ export default () => {
         <label for="signin-pass">create password</label>
         <br />
         <input name="signin-pass" /> <br />
+        {submitButton}
       </form>
 
       <h3>Sign Up</h3>
@@ -27,6 +38,7 @@ export default () => {
         <br />
         <input name="profile-pic" type="file" placeholder="" />
         <br />
+        {submitButton}
       </form>
     </div>
   );
