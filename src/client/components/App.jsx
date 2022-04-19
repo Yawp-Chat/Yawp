@@ -1,12 +1,15 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import ChatBox from './ChatBox';
-import Input from './Input';
+import Login from '../containers/Login';
+import ChatContainer from '../containers/ChatContainer';
 
-const CLIENT_PORT = 8080;
+// const CLIENT_PORT = 8080;
+const SERVER_PORT = 3000;
 
+/** Add auth in options to pass along token */
 /** Establish websocket connection */
-const socket = io(`http://localhost:${CLIENT_PORT}`);
+const socket = io(`http://localhost:${SERVER_PORT}`, { timeout: 2000 });
 
 /** Listen for events */
 socket.on('connection', () => {
@@ -19,14 +22,11 @@ socket.on('disconnect', () => {
 
 function App() {
   /** use state to keep track of whether or not we are connected to server */
-  const handleSubmit = () => {
-    console.log('send message');
-  };
 
   return (
     <div className="messageContainer">
-      <ChatBox />
-      <Input handleSubmit={handleSubmit} />
+      <Login />
+      {/* <ChatContainer /> */}
     </div>
   );
 }
