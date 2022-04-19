@@ -7,57 +7,56 @@ import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import User from '../components/user';
 import Message from '../components/Message';
-// import './style/chat.css';
+import './style/chat.css';
 
 // const CLIENT_PORT = 8080;
 const SERVER_PORT = 3000;
 
 function ChatContainer() {
-  /** Add auth in options to pass along token */
+  /** TODO: Add auth in options to pass along token */
   /** Establish websocket connection */
-  const [socket, setSocket] = useState(
+  const socket = useRef(
     io(`http://localhost:${SERVER_PORT}`, { timeout: 2000 })
-  );
+  ).current;
+
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   /** Refrence in order to grab input from message input box */
   const messageRef = useRef();
 
-  // Setup socket connection
+  // Define event listeners for connect and disconnect
   useEffect(() => {
     /** Listen for events */
-    socket.on('connection', () => {
+    socket.on('connect', () => {
+      // TODO: toggle presence indicator
       console.log('connected');
     });
 
     socket.on('disconnect', () => {
+      // TODO: toggle presence indicator
       console.log('disconnected');
+    });
+
+    socket.on('msg:get', (data) => {
+      const { msg } = data;
+      console.log('everyone gets a msg:', msg);
+      setMessages((prev) =>
+        prev.concat(<Message key={`message${prev.length}`} text={msg} />)
+      );
     });
   }, []);
 
   const handleSubmit = () => {
     /** Grab message from input box */
     // TODO: handle case where nothing was added to input box
-    console.log('send message', messageRef.current.value);
-  };
-
-  const handleEnter = (e) => {
-    if (e.key === 'Enter') handleSubmit();
+    console.log('onClick', messageRef.current.value);
+    socket.emit('msg:post', { msg: messageRef.current.value });
   };
 
   /** For users signing in */
   useEffect(() => {
     setUsers((prev) => prev.concat(<User key={`user${socket.id}`} />));
   }, []);
-
-  /** For messages being sent */
-  useEffect(() => {
-    setMessages((prev) =>
-      prev.concat(<Message key={`message${prev.length}`} />)
-    );
-  }, []);
-
-  console.log(users, messages);
 
   return (
     <div className="chatContainer">
@@ -72,7 +71,9 @@ function ChatContainer() {
           ref={messageRef}
           className="chatInput"
           placeholder="write message here..."
-          onKeyPress={(e) => handleEnter(e)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') handleSubmit();
+          }}
         />
         <button type="submit" className="btn-send" onClick={handleSubmit}>
           Send

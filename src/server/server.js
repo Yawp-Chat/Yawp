@@ -21,6 +21,17 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
   console.log(`socket connected: ${socket.id}`);
+
+  /** handle msg:post event */
+  socket.on('msg:post', (data) => {
+    const { msg } = data;
+    console.log('message sent:', msg);
+    io.emit('msg:get', { msg });
+  });
+  /** log connection errors */
+  socket.on('connect_error', (err) => {
+    console.log('connection error due to:', err);
+  });
 });
 
 app.use(express.urlencoded({ extended: true }));
