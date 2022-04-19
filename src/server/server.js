@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const { SERVER_PORT } = process.env;
+const { SERVER_PORT, CLIENT_PORT } = process.env;
 
 const app = express();
 const server = http.createServer(app);
@@ -15,8 +15,7 @@ const server = http.createServer(app);
 /** Handle CORS */
 const io = new Server(server, {
   cors: {
-    origin: 'https://localhost:8080',
-    methods: ['GET', 'POST'],
+    origin: `http://localhost:${CLIENT_PORT}`,
   },
 });
 
@@ -27,6 +26,11 @@ io.on('connection', (socket) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../build')));
+
+/** Redirect to root for react router */
+app.use('/home', (req, res) => {
+  res.redirect('/');
+});
 
 // Global error handler
 app.use((err, req, res, next) => {

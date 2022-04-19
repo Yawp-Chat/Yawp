@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import { io } from 'socket.io-client';
 import Login from '../containers/Login';
 import ChatContainer from '../containers/ChatContainer';
