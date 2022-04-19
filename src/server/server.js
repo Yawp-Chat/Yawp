@@ -34,4 +34,6 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(SERVER_PORT, () => console.log(`Listening on PORT: ${SERVER_PORT}`));
+server.listen(SERVER_PORT, () =>
+  console.log(`Listening on PORT: ${SERVER_PORT}`)
+);
