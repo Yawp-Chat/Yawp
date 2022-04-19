@@ -11,7 +11,7 @@
 }
 
 .userBox {
-  grid-area: users;
+  grid-area: userBox;
 }
 
 .chat {
@@ -21,3 +21,11 @@
 .message {
   grid-area: message;
 }
+
+/* User.jsx Components
+
+/user-UserBox
+
+
+
+*/

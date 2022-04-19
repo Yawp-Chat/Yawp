@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import Login from '../containers/Login';
 import ChatContainer from '../containers/ChatContainer';
@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="messageContainer">
       <Login />
-      {/* <ChatContainer /> */}
+      <ChatContainer />
     </div>
   );
 }
