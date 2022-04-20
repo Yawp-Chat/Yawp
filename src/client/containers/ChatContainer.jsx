@@ -5,7 +5,6 @@
  */
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
-import User from '../components/user';
 import Message from '../components/Message';
 import './style/chat.css';
 
@@ -20,8 +19,9 @@ let socket;
 function ChatContainer({ currentUser }) {
   const chatRef = useRef();
 
-  const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [lastUser, setLastUser] = useState('');
+
   /** Refrence in order to grab input from message input box */
   const messageRef = useRef();
 
@@ -48,10 +48,16 @@ function ChatContainer({ currentUser }) {
     });
 
     socket.on('msg:get', ({ msg, username }) => {
-      // assign classname based on whether or not you sent the message
-      console.log(username, currentUser, username === currentUser);
+      const isSender = username === currentUser ? 'currentUser' : 'otherUser'
 
-      const isSender = username === currentUser ? 'currentUser' : 'otherUser';
+      console.log(username === lastUser)
+      console.log('this mesage is from:', username)
+      console.log('the last message was from', lastUser)
+
+      setLastUser((prev) => {
+        if (prev !== username) return username
+        else username = null
+      })
 
       setMessages((prev) =>
         prev.concat(
@@ -63,8 +69,9 @@ function ChatContainer({ currentUser }) {
           />
         )
       );
+      // scroll top is distance from the top of the scrollbar 
       // scroll top is distance from the top of the scrollbar
-      // scroll height is the hieght of the whole div
+      // scroll height is the height of the whole div
       // TODO: don't scroll down if the user scrolled up
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     });
@@ -75,28 +82,20 @@ function ChatContainer({ currentUser }) {
     // TODO: handle case where nothing was added to input box
     const msg = messageRef.current.value;
 
-    console.log('what am i', currentUser);
-
-    if (msg.replace(/\s/g, '').length)
-      socket.emit('msg:post', { msg, currentUser });
+    if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg , currentUser });
 
     messageRef.current.value = '';
   };
 
-  /** For users signing in */
-  useEffect(() => {
-    setUsers((prev) => prev.concat(<User key={`user${socket.id}`} />));
-  }, []);
-
   return (
     <div className="chatContainer">
-      <div className="userBox">
-        <ul>{users}</ul>
+      <div className="chatHeader">
+  
       </div>
       <div ref={chatRef} className="chat">
         <ul>{messages}</ul>
       </div>
-      <div className="message">
+      <div className="messageContainer">
         <input
           ref={messageRef}
           className="chatInput"

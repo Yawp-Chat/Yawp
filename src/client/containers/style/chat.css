@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100&display=swap');
 
+#root{
+  width: 100%;
+  height: 100%;
+}
+
+html{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+main{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body{
   background-color: #000;
   color: white;
@@ -14,11 +34,20 @@ body{
 header{
   height: 50px;
   width: 100%;
-  background: #6200ee;
-  margin-bottom: 75px;
+  background: goldenrod;
+  margin-bottom: 20px;
 }
 
-ul li{
+/* #6200ee */
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+ }
+
+ li{
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -55,50 +84,34 @@ ul li{
 } */
 
 .chatContainer {  
-  border: 1px solid white;
-  display: grid;
-  padding: 30px;
-  grid-template-columns: 0.5fr 1.5fr;
-  grid-template-rows: 1fr 0.9fr 1.1fr 0.5fr;
-  grid-auto-rows: 1fr;
-  gap: 0px 0px;
-  height: 70vh;
-  width: 50%;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "users chat"
-    "users chat"
-    "users chat"
-    "message message";
+ width: 100%;
 }
 
 
-
-.users {
-  grid-area: users;
-  border-right: 1px solid white;
-  padding: 10px 30px 10px 30px;
-  /* background-color: black; */
-  color: black;
-  /* background-color: aquamarine; */
-}
 
 .chat {
-  grid-area: chat;
+  /* grid-area: chat; */
   /* border: 1px solid white; */
-  padding: 10px 30px 10px 30px;
-  overflow: auto;
+  padding: 20px 40px;
+  overflow: scroll;
+  height: 80vh;
+  /* width: 100%; */
 }
+/* todo: message box disapears on short vertically screen. need to fix */
 
-.message {
-  grid-area: message;
+.messageContainer {
+  /* grid-area: message; */
   /* border: 1px solid white; */
   /* padding: 10px 30px 10px 30px; */
   /* overflow-y: 
   scroll; */
   align-self: end;
   justify-self: center;
-  padding-bottom: 15px;
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  /* padding-bottom: 15px; */
   /* background-color:#6200ee;
   width: 100%;
   height: 100%; */
@@ -106,13 +119,49 @@ ul li{
 
 }
 
+.chat h3{
+  font-size: 11px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+.chat h5{
+  font-size: 18px;
+  max-width: 60vw;
+  width: auto;
+  display: inline-block;
+  padding: 4px 8px;
+  text-align: left;
+  border-radius: 8px;
+  /* text-align:right; */
+}
+
+.currentUser h5{
+  background-color: dodgerblue;
+  margin: 3px;
+}
+
+.otherUser h5{
+  background-color: tomato;
+  margin: 3px;
+}
+
+.otherUser{
+  text-align: left;
+}
+.currentUser{
+  text-align: right;
+  align-self: end;
+}
+
 .chatInput{
-  width: 300px;
+  width: 75%;
   outline: none;
-  background-color: #000;
-  border: 2px solid white;
+  height: 20px;
+  background-color: #555;
+  /* border: 2px solid white; */
   border-radius: 3px;
-  color: white;
+  color: #aaa;
   
 }
 
