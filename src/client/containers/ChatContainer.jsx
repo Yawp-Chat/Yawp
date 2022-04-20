@@ -12,7 +12,7 @@ import './style/chat.css';
 // const CLIENT_PORT = 8080;
 const SERVER_PORT = 3000;
 
-function ChatContainer({ username }) {
+function ChatContainer({ currentUser }) {
   /** TODO: Add auth in options to pass along token */
   /** Establish websocket connection */
   const socket = useRef(
@@ -39,8 +39,14 @@ function ChatContainer({ username }) {
     });
 
     socket.on('msg:get', ({ msg, username }) => {
+
+      // assign classname based on whether or not you sent the message
+      console.log(username, currentUser, username === currentUser)
+
+      const isSender = username === currentUser ? 'currentUser' : 'otherUser'
+
       setMessages((prev) =>
-        prev.concat(<Message key={`message${prev.length}`} msg={msg} username={username} />)
+        prev.concat(<Message isSender={isSender} key={`message${prev.length}`} msg={msg} username={username} />)
       );
       // scroll top is distance from the top of the scrollbar 
       // scroll height is the hieght of the whole div
@@ -54,7 +60,9 @@ function ChatContainer({ username }) {
     // TODO: handle case where nothing was added to input box
     const msg = messageRef.current.value
 
-    if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg , username });
+    console.log('what am i', currentUser)
+
+    if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg , currentUser });
 
     messageRef.current.value = '';
   };

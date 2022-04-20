@@ -17,7 +17,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login setUsername={setUsername} />} />
-            <Route path="/home" element={<ChatContainer username={username} />} />
+            <Route path="/home" element={<ChatContainer currentUser={username} />} />
           </Routes>
         </BrowserRouter>
       </div>
