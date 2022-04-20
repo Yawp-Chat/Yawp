@@ -18,7 +18,14 @@ header{
   margin-bottom: 75px;
 }
 
-ul li{
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+ }
+
+ li{
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -55,7 +62,7 @@ ul li{
 } */
 
 .chatContainer {  
-  border: 1px solid white;
+  /* border: 1px solid white;
   display: grid;
   padding: 30px;
   grid-template-columns: 0.5fr 1.5fr;
@@ -69,41 +76,62 @@ ul li{
     "users chat"
     "users chat"
     "users chat"
-    "message message";
+    "message message"; */
 }
 
 
 
-.users {
+/* .users {
   grid-area: users;
   border-right: 1px solid white;
   padding: 10px 30px 10px 30px;
-  /* background-color: black; */
+  /* background-color: black; 
   color: black;
-  /* background-color: aquamarine; */
-}
+  /* background-color: aquamarine; 
+} */
 
 .chat {
-  grid-area: chat;
+  /* grid-area: chat; */
   /* border: 1px solid white; */
-  padding: 10px 30px 10px 30px;
-  overflow: auto;
+  padding: 10px;
+  overflow: scroll;
+  height: 70vh;
 }
 
-.message {
-  grid-area: message;
+.messageContainer {
+  /* grid-area: message; */
   /* border: 1px solid white; */
   /* padding: 10px 30px 10px 30px; */
   /* overflow-y: 
   scroll; */
   align-self: end;
   justify-self: center;
-  padding-bottom: 15px;
+  /* padding-bottom: 15px; */
   /* background-color:#6200ee;
   width: 100%;
   height: 100%; */
   
 
+}
+
+.chat h3{
+  font-size: 11px;
+  margin: 2px;
+}
+
+.chat h5{
+  font-size: 18px;
+  max-width: 70vw;
+  width: auto;
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: dodgerblue;
+  border-radius: 8px;
+ 
+}
+
+.message-li{
+ 
 }
 
 .chatInput{

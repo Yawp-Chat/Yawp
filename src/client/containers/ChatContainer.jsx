@@ -74,13 +74,13 @@ function ChatContainer({ currentUser }) {
 
   return (
     <div className="chatContainer">
-      <div className="userBox">
-        <ul>{users}</ul>
+      <div className="chatHeader">
+  
       </div>
       <div ref={chatRef} className="chat">
         <ul>{messages}</ul>
       </div>
-      <div className="message">
+      <div className="messageContainer">
         <input
           ref={messageRef}
           className="chatInput"
