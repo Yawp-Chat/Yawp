@@ -84,7 +84,9 @@ ul{
 } */
 
 .chatContainer {  
- width: 100%;
+  width: 100%;
+  border: 0.5px solid white;
+  padding: 0 0 10px 0;
 }
 
 
@@ -171,7 +173,10 @@ ul{
   /* display: block; */
   /* position: relative; */
   /* left: 80% */
-  background-color: #7A5C58;
+  background-color: white;
+  height: 25px;
+  color: black;
+  font-weight: 500;
   
 }
 

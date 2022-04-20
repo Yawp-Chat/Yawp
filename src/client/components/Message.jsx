@@ -2,7 +2,6 @@ import React from 'react';
 // single message
 
 export default ({isSender, msg, username}) => {
-  console.log('in Message', username)
   return (
     <li className={`message-li ${isSender}`}>
       {/* <img className="img-user-message" /> */}

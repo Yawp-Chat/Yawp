@@ -20,8 +20,6 @@ export default function ({ setUsername }) {
       usersecret
     }
 
-    console.log('userData:', userData);
-
     fetch('/api/login', {
       method: 'POST',
       headers: {

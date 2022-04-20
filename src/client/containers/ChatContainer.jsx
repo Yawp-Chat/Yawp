@@ -15,12 +15,12 @@ const SERVER_PORT = 3000;
 // NOTE: useRef and useState inside of the ChatContainer function still
 // creates a new socket for each message
 let socket;
+let lastUser = '';
 
 function ChatContainer({ currentUser }) {
   const chatRef = useRef();
 
   const [messages, setMessages] = useState([]);
-  const [lastUser, setLastUser] = useState('');
 
   /** Refrence in order to grab input from message input box */
   const messageRef = useRef();
@@ -50,14 +50,17 @@ function ChatContainer({ currentUser }) {
     socket.on('msg:get', ({ msg, username }) => {
       const isSender = username === currentUser ? 'currentUser' : 'otherUser'
 
-      console.log(username === lastUser)
-      console.log('this mesage is from:', username)
-      console.log('the last message was from', lastUser)
+      // setLastUser((prev) => {
+      //   console.log('prev messages was from', prev)
+      //   console.log('cur messages is from', username)
+      //   console.log('----------------------------------------')
 
-      setLastUser((prev) => {
-        if (prev !== username) return username
-        else username = null
-      })
+      //   if (prev == username) username = null;
+      //   return username;
+      // })
+
+      if (lastUser === username) username = null
+      else lastUser = username;
 
       setMessages((prev) =>
         prev.concat(
@@ -81,9 +84,7 @@ function ChatContainer({ currentUser }) {
     /** Grab message from input box */
     // TODO: handle case where nothing was added to input box
     const msg = messageRef.current.value;
-
     if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg , currentUser });
-
     messageRef.current.value = '';
   };
 
