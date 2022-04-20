@@ -3,6 +3,19 @@
 body{
   background-color: #000;
   color: white;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+header{
+  height: 50px;
+  width: 100%;
+  background: #6200ee;
+  margin-bottom: 75px;
 }
 
 ul {
@@ -20,13 +33,12 @@ ul {
 }
 
 
-.chatContainer {
-  height: 75vh;
-
+/* .chatContainer {
+  
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 10px 10px;
+  gap: 0px 0px;
   border: 1px solid white;
   grid-auto-flow: row;
   grid-template-areas:
@@ -34,37 +46,74 @@ ul {
     'userBox chat'
     'message chat';
   
+} */
+
+.chatContainer {  
+  border: 1px solid white;
+  display: grid;
+  padding: 30px;
+  grid-template-columns: 0.6fr 1.4fr;
+  grid-template-rows: 1fr 0.9fr 1.1fr 0.5fr;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  height: 70vh;
+  width: 50%;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "users chat"
+    "users chat"
+    "users chat"
+    "message message";
 }
 
-.userBox {
-  grid-area: userBox;
-  border: 1px solid white;
+
+
+.users {
+  grid-area: users;
+  border-right: 1px solid white;
   padding: 10px 30px 10px 30px;
-  background-color: black;
+  /* background-color: black; */
+  color: black;
+  /* background-color: aquamarine; */
 }
 
 .chat {
   grid-area: chat;
-  border: 1px solid white;
+  /* border: 1px solid white; */
   padding: 10px 30px 10px 30px;
+  
 }
 
 .message {
   grid-area: message;
   /* border: 1px solid white; */
-  padding: 10px 30px 10px 30px;
+  /* padding: 10px 30px 10px 30px; */
   /* overflow-y: 
   scroll; */
   align-self: end;
   justify-self: center;
+  padding-bottom: 30px;
+  /* background-color:#6200ee;
+  width: 100%;
+  height: 100%; */
+  
 
 }
 
+.chatInput{
+  width: 300px;
+  outline: none;
+  background-color: #222;
+  border: 3px solid white;
+  border-radius: 3px;
+  color: white;
+}
+
 .btn-send{
-  margin-top: 10px;
-  display: block;
-  position: relative;
-  left: 73.5%
+  /* margin-top: 10px; */
+  /* display: block; */
+  /* position: relative; */
+  /* left: 80% */
 }
 
 

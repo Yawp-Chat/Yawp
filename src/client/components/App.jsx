@@ -10,13 +10,16 @@ import '../containers/style/chat.css'
 function App() {
   /** use state to keep track of whether or not we are connected to server */
   return (
-    <div className="messageContainer">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<ChatContainer />} />
-        </Routes>
-      </BrowserRouter>
+    <div className="main">
+      <header />
+      <div className="messageContainer">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<ChatContainer />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }
