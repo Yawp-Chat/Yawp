@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function () {
+export default function ({ setUsername }) {
   const [image, setImage] = useState(null);
   const [signingIn, setSigningIn] = useState(true)
   const navigate = useNavigate();
+  const loginPasswordRef = useRef();
 
-  const handleSignIn = (e) => {
+  const handleLogIn = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target)
     const formProps = Object.fromEntries(formData);
 
-    const data = {
-      username: formProps.username,
-      password: formProps.password
+    const { username, usersecret } = formProps
+
+    const userData = {
+      username,
+      usersecret
     }
 
-    console.log('handleSignIn data', data)
+    console.log('userData:', userData);
 
-    navigate('/home');
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.auth) {
+          setUsername(username);
+          navigate('/home');
+        } else {
+          loginPasswordRef.current.value = ""
+        }
+      })
+      .catch(err => {
+        console.log('Error signing in:', err);
+      });
   };
 
   const handleSignUp = (e) => {
@@ -28,15 +49,32 @@ export default function () {
     const formData = new FormData(e.target)
     const formProps = Object.fromEntries(formData);
 
-    const data = {
-      username: formProps.username,
-      password: formProps.password,
-      image,
+    const { username, usersecret } = formProps
+
+    const userData = {
+      username,
+      usersecret
     }
-
-    console.log('handleSignUp data', data)
-
-    navigate('/home');
+    
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.auth) {
+          setUsername(username);
+          navigate('/home');
+        } else {
+          loginPasswordRef.current.value = ""
+        }
+      })
+      .catch(err => {
+        console.log('Error signing up:', err)
+      })
   };
 
   const signInPage = () => {
@@ -45,13 +83,13 @@ export default function () {
 
       <button onClick={() => setSigningIn(false)}>Don't have an account? Sign up here</button> <br />
 
-      <form name="signin" onSubmit={(e) => handleSignIn(e)}>
+      <form name="signin" onSubmit={(e) => handleLogIn(e)}>
         <label htmlFor="username">Enter Username</label> <br />
         <input name="username" />
         <br />
-        <label htmlFor="password">Enter Password</label>
+        <label htmlFor="usersecret">Enter Password</label>
         <br />
-        <input name="password" /> <br />
+        <input ref={loginPasswordRef} name="usersecret" /> <br />
         <button type="submit">Submit</button>
       </form>
     </>
@@ -68,9 +106,9 @@ export default function () {
         <br />
         <input name="username" />
         <br />
-        <label htmlFor="password">Create Password</label>
+        <label htmlFor="usersecret">Create Password</label>
         <br />
-        <input name="password" />
+        <input name="usersecret" />
         <br />
         <label htmlFor="image">Choose Profile Picture</label>
         <br />
@@ -93,9 +131,7 @@ export default function () {
         width="250px"
         src={URL.createObjectURL(new Blob([image], { type: "application/zip" }))}
       /> : null}
-
       {signingIn ? signInPage() : signUpPage()}
-      
     </div>
   );
 }
