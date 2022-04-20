@@ -30,8 +30,9 @@ io.on('connection', (socket) => {
   console.log(`socket connected: ${socket.id}`);
 
   /** handle msg:post event */
-  socket.on('msg:post', ({ msg, username }) => {
-    console.log('message sent:', msg);
+  socket.on('msg:post', ({ msg, currentUser }) => {
+    const username = currentUser
+    console.log('message sent:', msg, username);
     io.emit('msg:get', { msg, username });
   });
   /** log connection errors */
