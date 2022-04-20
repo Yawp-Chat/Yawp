@@ -12,12 +12,13 @@ import './style/chat.css';
 // const CLIENT_PORT = 8080;
 const SERVER_PORT = 3000;
 
-function ChatContainer() {
+function ChatContainer({ username }) {
   /** TODO: Add auth in options to pass along token */
   /** Establish websocket connection */
   const socket = useRef(
-    io(`http://localhost:${SERVER_PORT}`, { timeout: 2000 })
+    io(`ws://localhost:${SERVER_PORT}`, { timeout: 2000 })
   ).current;
+  const chatRef = useRef()
 
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -37,12 +38,14 @@ function ChatContainer() {
       console.log('disconnected');
     });
 
-    socket.on('msg:get', (data) => {
-      const { msg } = data;
-      console.log('everyone gets a msg:', msg);
+    socket.on('msg:get', ({ msg, username }) => {
       setMessages((prev) =>
-        prev.concat(<Message key={`message${prev.length}`} text={msg} />)
+        prev.concat(<Message key={`message${prev.length}`} msg={msg} username={username} />)
       );
+      // scroll top is distance from the top of the scrollbar 
+      // scroll height is the hieght of the whole div
+      // TODO: don't scroll down if the user scrolled up
+      chatRef.current.scrollTop = chatRef.current.scrollHeight
     });
   }, []);
 
@@ -51,7 +54,7 @@ function ChatContainer() {
     // TODO: handle case where nothing was added to input box
     const msg = messageRef.current.value
 
-    if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg });
+    if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg , username });
 
     messageRef.current.value = '';
   };
@@ -66,7 +69,7 @@ function ChatContainer() {
       <div className="userBox">
         <ul>{users}</ul>
       </div>
-      <div className="chat">
+      <div ref={chatRef} className="chat">
         <ul>{messages}</ul>
       </div>
       <div className="message">

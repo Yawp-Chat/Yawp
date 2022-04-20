@@ -3,13 +3,20 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
-
+const apiRouter = require('./routers/api'); 
 dotenv.config();
 
 const { SERVER_PORT, CLIENT_PORT } = process.env;
 
 const app = express();
+
 const server = http.createServer(app);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.use('/api', apiRouter); 
 
 /** Establish new WS server */
 /** Handle CORS */
@@ -23,10 +30,9 @@ io.on('connection', (socket) => {
   console.log(`socket connected: ${socket.id}`);
 
   /** handle msg:post event */
-  socket.on('msg:post', (data) => {
-    const { msg } = data;
+  socket.on('msg:post', ({ msg, username }) => {
     console.log('message sent:', msg);
-    io.emit('msg:get', { msg });
+    io.emit('msg:get', { msg, username });
   });
   /** log connection errors */
   socket.on('connect_error', (err) => {
@@ -34,9 +40,6 @@ io.on('connection', (socket) => {
   });
 });
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../build')));
 
 /** Redirect to root for react router */
 app.use('/home', (req, res) => {
@@ -58,3 +61,5 @@ app.use((err, req, res, next) => {
 server.listen(SERVER_PORT, () =>
   console.log(`Listening on PORT: ${SERVER_PORT}`)
 );
+
+// module.exports = app; 
