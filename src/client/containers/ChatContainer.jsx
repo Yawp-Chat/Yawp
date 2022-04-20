@@ -49,8 +49,11 @@ function ChatContainer() {
   const handleSubmit = () => {
     /** Grab message from input box */
     // TODO: handle case where nothing was added to input box
-    console.log('onClick', messageRef.current.value);
-    socket.emit('msg:post', { msg: messageRef.current.value });
+    const msg = messageRef.current.value
+
+    if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg });
+
+    messageRef.current.value = '';
   };
 
   /** For users signing in */
