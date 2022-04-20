@@ -69,7 +69,8 @@ export default function ({ setUsername }) {
           setUsername(username);
           navigate('/home');
         } else {
-          loginPasswordRef.current.value = ""
+          document.getElementById('signupUsername').value = ""
+          document.getElementById('signupUsersecret').value = ""
         }
       })
       .catch(err => {
@@ -89,7 +90,8 @@ export default function ({ setUsername }) {
         <br />
         <label htmlFor="usersecret">Enter Password</label>
         <br />
-        <input ref={loginPasswordRef} name="usersecret" /> <br />
+        <input ref={loginPasswordRef} type="password" name="usersecret" /> <br />
+        <br />
         <button type="submit">Submit</button>
       </form>
     </>
@@ -104,20 +106,20 @@ export default function ({ setUsername }) {
       <form name="signup" onSubmit={(e) => handleSignUp(e)}>
         <label htmlFor="username">Create Username</label>
         <br />
-        <input name="username" />
+        <input id="signupUsername" name="username" />
         <br />
         <label htmlFor="usersecret">Create Password</label>
         <br />
-        <input name="usersecret" />
+        <input type="password" id="signupUsersecret" name="usersecret" />
         <br />
-        <label htmlFor="image">Choose Profile Picture</label>
-        <br />
-        <input name="image" type="file" placeholder="" onChange={
+        {/* <label htmlFor="image">Choose Profile Picture</label> */}
+        {/* <br /> */}
+        {/* <input name="image" type="file" placeholder="" onChange={
           (e) => {
             console.log(e.target.files[0])
             setImage(e.target.files[0])
           }
-        }/>
+        }/> */}
         <br />
         <button type="submit">Submit</button>
       </form>

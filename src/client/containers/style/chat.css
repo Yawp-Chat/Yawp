@@ -34,7 +34,7 @@ body{
 header{
   height: 50px;
   width: 100%;
-  background: goldenrod;
+  background: #8D80AD;
   margin-bottom: 20px;
 }
 
@@ -137,12 +137,12 @@ ul{
 }
 
 .currentUser h5{
-  background-color: dodgerblue;
+  background-color: #99B2DD;
   margin: 3px;
 }
 
 .otherUser h5{
-  background-color: tomato;
+  background-color: #64F58D;
   margin: 3px;
 }
 
@@ -157,11 +157,12 @@ ul{
 .chatInput{
   width: 75%;
   outline: none;
-  height: 20px;
-  background-color: #555;
+  height: 25px;
+  border: 2px solid #8D80AD;
+  /* background-color: #8D80AD; */
   /* border: 2px solid white; */
-  border-radius: 3px;
-  color: #aaa;
+  /* border-radius: 3px; */
+  color: white;
   
 }
 
@@ -170,6 +171,8 @@ ul{
   /* display: block; */
   /* position: relative; */
   /* left: 80% */
+  background-color: #7A5C58;
+  
 }
 
 
