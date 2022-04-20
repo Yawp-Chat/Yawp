@@ -34,9 +34,11 @@ body{
 header{
   height: 50px;
   width: 100%;
-  background: #6200ee;
+  background: goldenrod;
   margin-bottom: 20px;
 }
+
+/* #6200ee */
 
 ul{
   list-style-type: none;
@@ -119,7 +121,8 @@ ul{
 
 .chat h3{
   font-size: 11px;
-  margin: 2px;
+  margin-bottom: 2px;
+  margin-top: 2px;
 }
 
 .chat h5{
@@ -135,10 +138,12 @@ ul{
 
 .currentUser h5{
   background-color: dodgerblue;
+  margin: 3px;
 }
 
 .otherUser h5{
   background-color: tomato;
+  margin: 3px;
 }
 
 .otherUser{
