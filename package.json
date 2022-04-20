@@ -4,8 +4,9 @@
   "description": "Open source chatting",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production nodemon server/server.js",
+    "start": "nodemon src/server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
+    "front": "export NODE_ENV=development && webpack serve --open",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"cross-env NODE_ENV=development nodemon server/server.js \""
   },
   "repository": {
