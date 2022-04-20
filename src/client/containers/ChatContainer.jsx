@@ -50,14 +50,7 @@ function ChatContainer({ currentUser }) {
     socket.on('msg:get', ({ msg, username }) => {
       const isSender = username === currentUser ? 'currentUser' : 'otherUser'
 
-      // setLastUser((prev) => {
-      //   console.log('prev messages was from', prev)
-      //   console.log('cur messages is from', username)
-      //   console.log('----------------------------------------')
-
-      //   if (prev == username) username = null;
-      //   return username;
-      // })
+      console.log('the last user is', lastUser);
 
       if (lastUser === username) username = null
       else lastUser = username;

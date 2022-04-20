@@ -89,8 +89,6 @@ ul{
   padding: 0 0 10px 0;
 }
 
-
-
 .chat {
   /* grid-area: chat; */
   /* border: 1px solid white; */
@@ -151,6 +149,7 @@ ul{
 .otherUser{
   text-align: left;
 }
+
 .currentUser{
   text-align: right;
   align-self: end;
@@ -161,7 +160,7 @@ ul{
   outline: none;
   height: 25px;
   border: 2px solid #8D80AD;
-  /* background-color: #8D80AD; */
+  background-color: #000;
   /* border: 2px solid white; */
   /* border-radius: 3px; */
   color: white;
@@ -189,3 +188,45 @@ ul{
 
 
 */
+
+.usernamecurrentUser {
+  position: relative;
+  left: -25px;
+}
+
+.usernameotherUser {
+  position: relative;
+  left: 25px;
+}
+
+.ballcurrentUser {
+  float: right;
+  position: relative;
+  left: 25px;
+}
+
+.ballotherUser {
+  float: left;
+  position: relative;
+  left: -25px;
+}
+
+.messageYescurrentUser {
+  position: relative;
+  left: 20px;
+}
+
+.messageNocurrentUser {
+  position: relative;
+  left: -21px;
+}
+
+.messageYesotherUser {
+  position: relative;
+  left: -20px;
+}
+
+.messageNootherUser {
+  position: relative;
+  left: 21px;
+}
