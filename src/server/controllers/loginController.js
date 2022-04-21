@@ -21,7 +21,8 @@ loginController.user = (req, res, next)=> {
     }
 
     const { rows } = success;
-    res.locals.auth = usersecret === rows[0]?.usersecret
+    res.locals.username = rows[0]?.username;
+    res.locals.auth = usersecret === rows[0]?.usersecret;
     return next();
 
   })
@@ -37,10 +38,9 @@ db.query(queryString,[ username, usersecret], (err,success) => {
   if (err) {
     return next({log: `database says ${err} - unsuccessful attempt to add new user`, status: 500, message:'there was an error in your attempt to sign up'}); 
   }
-  else {
 
-    return next();
-  }
+  res.locals.valid = res.locals.username !== username;
+  return next();
 });
 
 }

@@ -5,6 +5,10 @@
   height: 100%;
 }
 
+.scrollable-element {
+  scrollbar-color: dark;
+}
+
 html{
   width: 100%;
   height: 100%;
@@ -34,7 +38,7 @@ body{
 header{
   height: 50px;
   width: 100%;
-  background: goldenrod;
+  background: #8D80AD;
   margin-bottom: 20px;
 }
 
@@ -82,19 +86,28 @@ ul{
     'message chat';
   
 } */
-
-.chatContainer {  
- width: 100%;
+.chatHeader{
+  position: relative;
+  height: 75px;
+  width: 100px;
+  left: 80%;
+  top: -20px;
+  margin-bottom: 20px;
+  /* bottom: 90%;   */
 }
-
-
+.chatContainer {  
+  width: 100%;
+  border: 0.5px solid white;
+  padding: 0 0 10px 0;
+}
 
 .chat {
   /* grid-area: chat; */
   /* border: 1px solid white; */
   padding: 20px 40px;
   overflow: scroll;
-  height: 80vh;
+  overflow-x: hidden;
+  height: 65vh;
   /* width: 100%; */
 }
 /* todo: message box disapears on short vertically screen. need to fix */
@@ -120,7 +133,7 @@ ul{
 }
 
 .chat h3{
-  font-size: 11px;
+  font-size: 12px;
   margin-bottom: 2px;
   margin-top: 2px;
 }
@@ -137,18 +150,21 @@ ul{
 }
 
 .currentUser h5{
-  background-color: dodgerblue;
+  background-color: #99B2DD;
   margin: 3px;
 }
 
 .otherUser h5{
-  background-color: tomato;
+  /* background-color: #64F58D; */
+  /* background-color: #db605d; */
+  background-color: #58bb89;
   margin: 3px;
 }
 
 .otherUser{
   text-align: left;
 }
+
 .currentUser{
   text-align: right;
   align-self: end;
@@ -157,11 +173,12 @@ ul{
 .chatInput{
   width: 75%;
   outline: none;
-  height: 20px;
-  background-color: #555;
+  height: 25px;
+  border: 2px solid #8D80AD;
+  background-color: #000;
   /* border: 2px solid white; */
-  border-radius: 3px;
-  color: #aaa;
+  /* border-radius: 3px; */
+  color: white;
   
 }
 
@@ -170,6 +187,11 @@ ul{
   /* display: block; */
   /* position: relative; */
   /* left: 80% */
+  background-color: white;
+  height: 25px;
+  color: black;
+  font-weight: 500;
+  
 }
 
 
@@ -181,3 +203,63 @@ ul{
 
 
 */
+
+Canvas{
+  /* display: flex; */
+  /* display: block;
+  z-index: -1; */
+}
+
+.ballContainer{
+  /* width: 120px;
+  height: 120px;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+  display:flex; */
+
+}
+/* 
+.usernamecurrentUser {
+  position: relative;
+  left: -25px;
+}
+
+.usernameotherUser {
+  position: relative;
+  left: 25px;
+} */
+
+/* .ballcurrentUser {
+  
+  height: 40px;
+  width: 40px;
+  position: relative;
+  left: 25px;
+}
+
+.ballotherUser {
+  float: left;
+  position: relative;
+  left: -25px;
+} */
+/* 
+.messageYescurrentUser {
+  position: relative;
+  left: 20px;
+}
+
+.messageNocurrentUser {
+  position: relative;
+  left: -21px;
+}
+
+.messageYesotherUser {
+  position: relative;
+  left: -20px;
+}
+
+.messageNootherUser {
+  position: relative;
+  left: 21px;
+} */

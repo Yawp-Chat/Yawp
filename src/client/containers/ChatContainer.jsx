@@ -3,10 +3,13 @@
  * ACTIVE USERS
  * MESSAGE INPUT AND SUBMIT
  */
-import React, { useState, useEffect, useRef } from 'react';
+
 import { io } from 'socket.io-client';
 import Message from '../components/Message';
 import './style/chat.css';
+import React, { useState, useEffect, useCallback, Suspense, useRef } from "react"
+import { Canvas } from "@react-three/fiber"
+import { useGLTF, useTexture, Shadow, meshBounds, OrbitControls } from "@react-three/drei"
 
 // const CLIENT_PORT = 8080;
 const SERVER_PORT = 3000;
@@ -15,12 +18,12 @@ const SERVER_PORT = 3000;
 // NOTE: useRef and useState inside of the ChatContainer function still
 // creates a new socket for each message
 let socket;
+let lastUser = '';
 
 function ChatContainer({ currentUser }) {
   const chatRef = useRef();
 
   const [messages, setMessages] = useState([]);
-  const [lastUser, setLastUser] = useState('');
 
   /** Refrence in order to grab input from message input box */
   const messageRef = useRef();
@@ -50,14 +53,8 @@ function ChatContainer({ currentUser }) {
     socket.on('msg:get', ({ msg, username }) => {
       const isSender = username === currentUser ? 'currentUser' : 'otherUser'
 
-      console.log(username === lastUser)
-      console.log('this mesage is from:', username)
-      console.log('the last message was from', lastUser)
-
-      setLastUser((prev) => {
-        if (prev !== username) return username
-        else username = null
-      })
+      if (lastUser === username) username = null
+      else lastUser = username;
 
       setMessages((prev) =>
         prev.concat(
@@ -73,7 +70,9 @@ function ChatContainer({ currentUser }) {
       // scroll top is distance from the top of the scrollbar
       // scroll height is the height of the whole div
       // TODO: don't scroll down if the user scrolled up
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+      const {scrollTop, scrollHeight} = chatRef.current
+
+      if (scrollTop >= scrollHeight - 800) chatRef.current.scrollTop = chatRef.current.scrollHeight;
     });
   }, []);
 
@@ -81,16 +80,14 @@ function ChatContainer({ currentUser }) {
     /** Grab message from input box */
     // TODO: handle case where nothing was added to input box
     const msg = messageRef.current.value;
-
     if (msg.replace(/\s/g, '').length) socket.emit('msg:post', { msg , currentUser });
-
     messageRef.current.value = '';
   };
 
   return (
     <div className="chatContainer">
       <div className="chatHeader">
-  
+        <CanvasContainer />
       </div>
       <div ref={chatRef} className="chat">
         <ul>{messages}</ul>
@@ -112,4 +109,39 @@ function ChatContainer({ currentUser }) {
   );
 }
 
+
+
+const CanvasContainer = (props) =>{
+  return(
+    <div className="ballContainer">
+      <Canvas className={`ball${props.isSender}`} orthographic shadows dpr={[1, 2]} camera={{ zoom: 20, position: [10, 10, 30], fov: 35 }}>
+        <Suspense fallback={null}>
+          <Ball />
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[-20, 20, 20]} intensity={.2} />
+     
+      {/* <a.pointLight position={[0, 0, 5]} distance={5} intensity={5} color={color} /> */}
+        <spotLight color={'#fff'} position={[10, 20, 20]} angle={0.1} intensity={2} shadow-mapSize-width={2048} shadow-mapSize-height={2048} shadow-bias={-0.00001} castShadow />
+        </Suspense>
+        <OrbitControls autoRotate autoRotateSpeed={7} />
+      </Canvas>
+    </div>
+
+  )
+}
+
+
+const Ball = () =>{
+  const ballRef = useRef(null)
+  console.log('ball Ref',ballRef)
+  const texture = useTexture("/ball3.jpg")
+  return(
+
+    <mesh postion={[130,300,300]} ref={ballRef}>
+    <sphereGeometry args={[1, 64, 64]} />
+      <meshStandardMaterial color="#a6fd29" materialclearcoatRoughness={.6} sheen={1} clearcoat={1} roughness={0.1} map={texture} />
+    </mesh>
+
+  )
+}
 export default ChatContainer;
