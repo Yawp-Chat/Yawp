@@ -53,8 +53,6 @@ function ChatContainer({ currentUser }) {
     socket.on('msg:get', ({ msg, username }) => {
       const isSender = username === currentUser ? 'currentUser' : 'otherUser'
 
-      console.log('the last user is', lastUser);
-
       if (lastUser === username) username = null
       else lastUser = username;
 
@@ -74,7 +72,7 @@ function ChatContainer({ currentUser }) {
       // TODO: don't scroll down if the user scrolled up
       const {scrollTop, scrollHeight} = chatRef.current
 
-      if (scrollTop >= scrollHeight - 550) chatRef.current.scrollTop = chatRef.current.scrollHeight;
+      if (scrollTop >= scrollHeight - 800) chatRef.current.scrollTop = chatRef.current.scrollHeight;
     });
   }, []);
 
@@ -125,7 +123,7 @@ const CanvasContainer = (props) =>{
       {/* <a.pointLight position={[0, 0, 5]} distance={5} intensity={5} color={color} /> */}
         <spotLight color={'#fff'} position={[10, 20, 20]} angle={0.1} intensity={2} shadow-mapSize-width={2048} shadow-mapSize-height={2048} shadow-bias={-0.00001} castShadow />
         </Suspense>
-        <OrbitControls />
+        <OrbitControls autoRotate autoRotateSpeed={7} />
       </Canvas>
     </div>
 
@@ -134,10 +132,12 @@ const CanvasContainer = (props) =>{
 
 
 const Ball = () =>{
+  const ballRef = useRef(null)
+  console.log('ball Ref',ballRef)
   const texture = useTexture("/ball3.jpg")
   return(
 
-    <mesh postion={[130,300,300]} >
+    <mesh postion={[130,300,300]} ref={ballRef}>
     <sphereGeometry args={[1, 64, 64]} />
       <meshStandardMaterial color="#a6fd29" materialclearcoatRoughness={.6} sheen={1} clearcoat={1} roughness={0.1} map={texture} />
     </mesh>
