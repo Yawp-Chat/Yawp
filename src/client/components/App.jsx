@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Login from '../containers/Login';
@@ -8,6 +8,7 @@ import '../containers/style/chat.css'
 
 
 function App() {
+  const [ username, setUsername ] = useState('');
   /** use state to keep track of whether or not we are connected to server */
   return (
     <div className="main">
@@ -15,8 +16,8 @@ function App() {
       <div className="messageContainer">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<ChatContainer />} />
+            <Route path="/" element={<Login setUsername={setUsername} />} />
+            <Route path="/home" element={<ChatContainer currentUser={username} />} />
           </Routes>
         </BrowserRouter>
       </div>
